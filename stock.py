@@ -1,49 +1,74 @@
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdul Mubeen | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo">Abdul Mubeen</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-def scrape_penny_stocks():
-    # The URL for penny stocks with current price <= 1
-    url = 'https://www.screener.in/screen/raw/?sort=current+price&order=asc&source_id=6994&query=Current+price+%3C%3D1'
-    
-    # Make a request to the URL
-    response = requests.get(url)
-    
-    # Check if the request was successful
-    if response.status_code != 200:
-        print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
-        return pd.DataFrame()  # Return an empty DataFrame if there's an error
+  <section id="hero">
+    <div class="hero-content">
+      <h2>Hello, I'm Abdul</h2>
+      <p>I'm a Data Scientist who builds intelligent systems and extracts value from data.</p>
+      <a href="#portfolio" class="btn">View Portfolio</a>
+    </div>
+  </section>
 
-    # Parse the HTML content
-    soup = BeautifulSoup(response.text, 'html.parser')
-    
-    # Find the table containing stock data
-    table = soup.find('table')  # Adjust this based on the actual structure of the page
-    
-    # Check if the table was found
-    if table is None:
-        print("Table not found!")
-        return pd.DataFrame()  # Return an empty DataFrame if the table is not found
-    
-    # Extract table rows
-    rows = table.find_all('tr')[1:]  # Skip the header row
-    
-    # Initialize lists to store the data
-    data = []
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>I’m Abdul Mubeen, a Data Scientist who believes in the power of data to tell stories, solve problems, and shape the future. From data wrangling to deploying models, I’m driven by curiosity and a passion for delivering practical, data-driven solutions. Every dataset is an opportunity, and every model is a step closer to clarity.</p>
+    </div>
+  </section>
 
-    # Loop through the rows and extract data
-    for row in rows:
-        columns = row.find_all('td')
-        if len(columns) > 0:
-            stock_data = [col.get_text(strip=True) for col in columns]
-            data.append(stock_data)
-    
-    # Create a DataFrame from the extracted data
-    # Update the column names according to the actual data structure
-    df = pd.DataFrame(data, columns=['Company', 'Current Price', 'Market Cap', 'P/E Ratio', 'Other Metrics'])  
-    
-    return df
+  <section id="portfolio">
+    <div class="container">
+      <h2>My Work</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <h3>Project Title 1</h3>
+          <p>Description for project 1 goes here. This should describe the data science work you've done.</p>
+        </div>
+        <div class="portfolio-item">
+          <h3>Project Title 2</h3>
+          <p>Description for project 2 goes here. This can highlight ML models or data analysis.</p>
+        </div>
+        <div class="portfolio-item">
+          <h3>Project Title 3</h3>
+          <p>Description for project 3 goes here. Focus on outcome and tools used.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-# Call the function and print the DataFrame
-penny_stocks = scrape_penny_stocks()
-print(penny_stocks.head(20))  # Print the first 20 entries
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <p>Email: abdulmubeen8bp@gmail.com</p>
+      <p>GitHub: <a href="https://github.com/amuneen" target="_blank">amuneen</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Abdul Mubeen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
